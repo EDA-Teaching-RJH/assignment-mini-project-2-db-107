@@ -1,3 +1,4 @@
 #stores valid passwords
 
-def storage():
+def passwords():
+    return
