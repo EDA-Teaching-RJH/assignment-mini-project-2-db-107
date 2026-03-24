@@ -8,7 +8,8 @@
 # limit character length
 # options - generate password, check password, view passwords, delete passwords, (update passwords? - maybe), end/ terminate programme.
 
-from unicodedata import name
+
+from random import random
 
 import cowsay
 #used the chat to install cowsay (wouldn't work without)
@@ -44,11 +45,15 @@ def password_gen():
             return
         if opt == "Y":
             return password_gen()
-        # generates a password using the allowed characters and the length specified by the user.
-
+        # Generates a password using the specified list of allowed 
+        # characters/ numbers and the length from the user input.
+    password = ""
+    for i in range(length):
+        password += all_allowed[int(random() * len(all_allowed))]
+        #this means - password + the allowed list of specified characters/ numbers
+        # times by the users given input/ value.
     
-    
-    
+    print(f"Generated Password: {password}")
 
 def password_view():
            # def storage == get_storage()
