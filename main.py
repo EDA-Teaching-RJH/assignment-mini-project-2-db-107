@@ -19,7 +19,7 @@ import storage
 
 def password_gen():
 
-    # tells the programme what characters, letters and numbers 
+    # Tells the programme what characters, letters and numbers 
     # are allowed to be used in the code generator.
     characters = "!£$%^&*()_+-={}~#][@:;'?><,./"
     numbers = "0123456789"
@@ -31,7 +31,22 @@ def password_gen():
     min_length = 6
     
     #ask 
-    print("Below is a list of password options")
+    print("\nLength of password (between 6 and 45 characters): ")
+    length = int(input("Length: "))
+    if length < min_length or length > max_length:
+        print("Invalid Length, Y to Try Again or Q to Quit")
+        
+        # Gives the user a choice whether to put in another value
+        # or return to the main menu.
+
+        opt = input("Option: ").capitalize()
+        if opt == "Q":
+            return
+        if opt == "Y":
+            return password_gen()
+        # generates a password using the allowed characters and the length specified by the user.
+
+    
     
     
 
@@ -47,13 +62,13 @@ active = True
 
 #runs main, asks user for name.
 def main():
-    print("- - - STARTING - - -")
+    print("\n- - - STARTING - - -")
     name = input("\nName: ").capitalize()
 
-    cowsay.turtle("Welcome, {name}")
+    cowsay.turtle(f"Welcome, {name}")
 #ask user to input a no. from 1-4 a links that option to a definition else where.
     while True:
-        print("-- Menu --")
+        print("\n-- Menu --")
         print("\n1. Generate New Password")
         print("2. View Passwords") # include delete (maybe update) options within 
         print("3. Check Password")
@@ -61,7 +76,7 @@ def main():
 
 #creates links to main (definition) sections of code
 #this had caused issues with the programme from running and had to add the {} to name to fix.
-        opt = input(f"{name}, Please select an option (1-4): ")
+        opt = input(f"{name}, Please Select an Option (1-4): ")
 
         if opt == "1":
             password_gen()
