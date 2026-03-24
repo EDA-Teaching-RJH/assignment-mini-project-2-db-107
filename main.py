@@ -8,7 +8,10 @@
 # limit character length
 # options - generate password, check password, view passwords, delete passwords, (update passwords? - maybe), end/ terminate programme.
 
+from unicodedata import name
+
 import cowsay
+#used the chat to install cowsay (wouldn't work without)
 import checker
 import storage
 
@@ -47,8 +50,7 @@ def main():
     print("- - - STARTING - - -")
     name = input("\nName: ").capitalize()
 
-    
-    cowsay.spaceship("Welcome, {name}")
+    cowsay.turtle("Welcome, {name}")
 #ask user to input a no. from 1-4 a links that option to a definition else where.
     while True:
         print("-- Menu --")
@@ -58,7 +60,7 @@ def main():
         print("4. Quit")
 
 #creates links to main (definition) sections of code
-#this had 
+#this had caused issues with the programme from running and had to add the {} to name to fix.
         opt = input(f"{name}, Please select an option (1-4): ")
 
         if opt == "1":
