@@ -12,8 +12,11 @@
 from random import random
 
 import cowsay
-#used the chat to install cowsay (wouldn't work without)
+
 import checker
+#import storage
+
+from storage import storage_passwords
 import storage
 
 
@@ -54,14 +57,60 @@ def password_gen():
         # times by the users given input/ value.
     
     print(f"Generated Password: {password}")
+    save = input("Save Password? Y/N: ").capitalize()
+    if save == "Y":
+        storage.save(password)
+    else:
+        return
+
+
 
 def password_view():
-           # def storage == get_storage()
-    print("...")
+    print("\n- - Saved Passwords - -")
+    print("\n1. View Saved")
+    print("2. Clear all")
+    print("3. Return to Main Menu")
+
+    opt = input(f"Select an option between 1-3: ")
+    if opt =="1":
+        passwords = []
+
+        while open("passwords.txt", "r") as file:
+            lines = file.readlines()
+            
+        file = open("passwords.txt", "r") as file:
+        lines = file.readlines()
+    
+        for line in lines:
+            print(line)
+    elif opt == "2":
+        storage.clear()
+    elif opt == "3":
+        return
+    else:
+        print("Not an Option, Enter a Valid Option")
+    
+    
 
 def password_check():
     
-    print("...")
+    print("\n- - Password Checker")
+    print("\n1. Enter Password")
+    print("2. Test Saved Password")
+    print("3. Return to Main Menu")
+
+    opt = input("Choose an option between 1-3: ")
+    if opt == "1":
+        password = input("Password: ")
+        checker.check(password)
+    elif opt == "2":
+        storage.view()
+        password = input("Password: ")
+        checker.check(password)
+    elif opt == "3":
+        return
+    else:
+        print("Not an Option, Enter a Valid Option")
 
 active = True
 
