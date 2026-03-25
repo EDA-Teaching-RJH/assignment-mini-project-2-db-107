@@ -62,8 +62,7 @@ def password_gen():
         # variables until it reaches the users inputted length.
 
     # This prints the password with the given values and the users input.
-    print(f"Generated Password: {password}")
-
+    cowsay.tux(f"Generated Password: {password}")
     # If "Y" the password is taken to storage and saved
     # If "N" this goe sback to the main menu.
     save = input("Save Password? Y/N: ").capitalize()
@@ -95,10 +94,12 @@ def password_view():
             
 
     elif opt == "2":
+       storage.storage_deleteall()
+        #This will link to storage where it will
+        # clear all passwords from the storage file after giving the
+        # user a choice to continue deleting or return.
+        
        
-        print("\nClearing Passwords...")
-        storage.clear()
-        print("Passwords Cleared.")
     elif opt == "3":
         return
     else:

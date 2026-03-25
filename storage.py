@@ -49,3 +49,21 @@ def storage_list():
         # so x is used to give the dictionary a value.
         for item in sorted (passwords, key=lambda x: x["password"]):
             print(f"--> {item['password']}")
+
+def storage_deleteall():
+    storage_check() #files and header - check.
+    passwords = []
+
+    clear_all = input("Clear all passwords? Y/N: ").capitalize()
+    if clear_all == "Y":
+
+        print("\nClearing Passwords...")
+        #re-writes the csv file as blank then tells the user
+        # its been cleared.
+        with open(file_name, "w", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow({file_name: passwords})
+        print("\nPasswords Cleared.")
+    else:
+        return
+    
