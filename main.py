@@ -32,13 +32,14 @@ def password_gen():
     max_length = 45
     min_length = 6
     
-    #ask 
-    print("\nLength of password (between 6 and 45 characters): ")
+    #Ask the user a length for the password.
+    print("\nLength of password (between 6 & 45 characters): ")
     length = int(input("Length: "))
+
     if length < min_length or length > max_length:
         print("Invalid Length, Y to Try Again or Q to Quit")
         
-        # Gives the user a choice whether to put in another value
+        #Gives the user a choice whether to put in another value
         # or return to the main menu.
 
         opt = input("Option: ").capitalize()
@@ -46,19 +47,27 @@ def password_gen():
             return
         if opt == "Y":
             return password_gen()
+        else:
+            print("\nInvalid Option")
+            return
         # Generates a password using the specified list of allowed 
         # characters/ numbers and the length from the user input.
 
     password = ""
     for i in range(length):
-        password += all_allowed[int(random() * len(all_allowed))]
-        #this means - password + the allowed list of specified characters/ number
-        # * by the users given input/ value.
-    
+        password += random.choice(all_allowed)
+        #This takes the users input (length) and applies that integer
+        # this is then added to the "password" with randomly selected "all_allowed"
+        # variables until it reaches the users inputted length.
+
+    # This prints the password with the given values and the users input.
     print(f"Generated Password: {password}")
+
+    # If "Y" the password is taken to storage and saved
+    # If "N" this goe sback to the main menu.
     save = input("Save Password? Y/N: ").capitalize()
     if save == "Y":
-        storage.save(password)
+        storage.storage_save(password)
     else:
         return
 
@@ -77,12 +86,15 @@ def password_view():
     # and print each password in the file.
     if opt =="1":
         print("\n- - Password List - -")
-        passwords = storage.storage_passwords()
+        passwords = storage.list_passwords()
 
+        # If there are no passwords no passwords will show
+        # If there are then passwords will be printed in a list.
         if not passwords:
             print("No passwords saved.")
         else:
-            print("")   
+            for password in passwords:
+                print(f"- {password}")
             
 
     elif opt == "2":
@@ -158,3 +170,4 @@ if __name__ == "__main__":
 
 #during a test i had an issue with option 2 (view password) linking to the code of
 # option 1 (password gen).
+#simple mistake such as capital letters/ typos

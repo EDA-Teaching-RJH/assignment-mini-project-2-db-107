@@ -1,28 +1,33 @@
 #stores valid passwords
 
 import csv
+import os
 import main
-
-def save(password):
-    with open(file_name, "a") as file:
-        writer = csv.DictWriter(fieldnames=["password"])
-        writer.writerow({"password": password })
-
-
-
 
 file_name = "password_storage.csv"
 
 #this checks that the password file has been made/ 
 # exists and makes a file if not.
 def storage_check():
-    
+    if not os.path.exists(file_name):
+        with open(file_name, "w") as file:
+            writer = csv.writer(file)
+            writer.writerow(["password"])
 
-#this is where passwords generated or inputted will be saved.
-def storage_passwords():
-     passwords = main.password_gen()
 
-def storage_saved():
+def storage_save(password):
+
+    #Continues from "def storage_check"
+    storage_check()
+
+    with open(file_name, "a") as file:
+        writer = csv.writer(file)
+        writer.writerow([password])
+#Previously - writer.writerow({"password": password }) which caused
+# the sotorage to save only the word "password" only.
+    print("\nPassword Saved.")
+
+
+
+#def storage_saved():
     return
-
-
