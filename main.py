@@ -9,14 +9,12 @@
 # options - generate password, check password, view passwords, delete passwords, (update passwords? - maybe), end/ terminate programme.
 
 
-from random import random
+import random
 
 import cowsay
 
 import checker
-#import storage
 
-from storage import storage_passwords
 import storage
 
 
@@ -50,11 +48,12 @@ def password_gen():
             return password_gen()
         # Generates a password using the specified list of allowed 
         # characters/ numbers and the length from the user input.
+
     password = ""
     for i in range(length):
         password += all_allowed[int(random() * len(all_allowed))]
-        #this means - password + the allowed list of specified characters/ numbers
-        # times by the users given input/ value.
+        #this means - password + the allowed list of specified characters/ number
+        # * by the users given input/ value.
     
     print(f"Generated Password: {password}")
     save = input("Save Password? Y/N: ").capitalize()
@@ -66,25 +65,30 @@ def password_gen():
 
 
 def password_view():
+    #choice of view functions
     print("\n- - Saved Passwords - -")
     print("\n1. View Saved")
     print("2. Clear all")
     print("3. Return to Main Menu")
 
     opt = input(f"Select an option between 1-3: ")
-    if opt =="1":
-        passwords = []
 
-        while open("passwords.txt", "r") as file:
-            lines = file.readlines()
+    #Opt 1 will open the file where the passwords are stored
+    # and print each password in the file.
+    if opt =="1":
+        print("\n- - Password List - -")
+        passwords = storage.storage_passwords()
+
+        if not passwords:
+            print("No passwords saved.")
+        else:
+            print("")   
             
-        file = open("passwords.txt", "r") as file:
-        lines = file.readlines()
-    
-        for line in lines:
-            print(line)
+
     elif opt == "2":
+        print("\nClearing Passwords...")
         storage.clear()
+        print("Passwords Cleared.")
     elif opt == "3":
         return
     else:
@@ -111,6 +115,9 @@ def password_check():
         return
     else:
         print("Not an Option, Enter a Valid Option")
+
+
+
 
 active = True
 
@@ -146,3 +153,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+#during a test i had an issue with option 2 (view password) linking to the code of
+# option 1 (password gen).
