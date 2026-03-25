@@ -12,6 +12,7 @@
 import random
 
 import cowsay
+from requests import delete
 
 import checker
 
@@ -86,18 +87,15 @@ def password_view():
     # and print each password in the file.
     if opt =="1":
         print("\n- - Password List - -")
-        passwords = storage.list_passwords()
+        passwords = storage.storage_list()
 
         # If there are no passwords no passwords will show
         # If there are then passwords will be printed in a list.
-        if not passwords:
-            print("No passwords saved.")
-        else:
-            for password in passwords:
-                print(f"- {password}")
+        return 
             
 
     elif opt == "2":
+       
         print("\nClearing Passwords...")
         storage.clear()
         print("Passwords Cleared.")
