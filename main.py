@@ -104,7 +104,7 @@ def password_view():
         return
     else:
         print("Not an Option, Enter a Valid Option")
-    
+    storage.storage_list()
     
 
 def password_check():
@@ -113,15 +113,16 @@ def password_check():
     print("\n1. Enter Password")
     print("2. Test Saved Password")
     print("3. Return to Main Menu")
-
+    
+    password = ""
     opt = input("Choose an option between 1-3: ")
     if opt == "1":
         password = input("Password: ")
-        checker.check(password)
+        checker.checker_password(password)
     elif opt == "2":
-        storage.view()
+        storage.storage_list()
         password = input("Password: ")
-        checker.check(password)
+        checker.checker_saved(password)
     elif opt == "3":
         return
     else:
