@@ -2,9 +2,26 @@
 #   length, character, numbers.
 #   rates the passwords strength (1-10)
 
-from main import password_check
+
+def checker_saved(password):
+    
+    #Asks the user if they want to save the password
+    # then stores it with all the other passwords in the csv.
+    import storage
+    print("\nDo you want to save password? ")
+    opt = input("Y/N ").capitalize()
+    if opt == "Y":
+        storage.storage_save(password)
+    elif opt == "N":
+        return
+    else:
+        print("Invalid Option")
+        return checker_saved(password)
+
 
 def checker_password(password):
+    
+    
     score = 0
 
     # Adds a score to the legth of the password
@@ -41,14 +58,4 @@ def checker_password(password):
     else:
         print("Error")
 
-    #Asks the user if they want to save the password
-    # then stores it with all the other passwords in the csv.
-    import storage
-    opt = input("\nDo you want to save password? Y/N: ").capitalize()
-    if opt == "Y":
-        storage.storage_save(password)
-    else:
-        return
     
-def checker_saved():
-    return

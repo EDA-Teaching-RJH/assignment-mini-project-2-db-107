@@ -12,7 +12,7 @@
 import random
 
 import cowsay
-from requests import delete
+import requests
 
 import checker
 
@@ -86,7 +86,7 @@ def password_view():
     # and print each password in the file.
     if opt =="1":
         print("\n- - Password List - -")
-        passwords = storage.storage_list()
+        storage.storage_list()
 
         # If there are no passwords no passwords will show
         # If there are then passwords will be printed in a list.
@@ -111,19 +111,34 @@ def password_check():
     
     print("\n- - Password Checker")
     print("\n1. Enter Password")
-    print("2. Test Saved Password")
-    print("3. Return to Main Menu")
+    print("2. Return to Main Menu")
     
     password = ""
-    opt = input("Choose an option between 1-3: ")
+    opt = input("\nChoose an option between 1-3: ")
     if opt == "1":
-        password = input("Password: ")
-        checker.checker_password(password)
-    elif opt == "2":
+        #Displays the stored passwords and then asks the
+        # user to input a password to then check that passwords (strength/ score).
+        print("\n Already Saved: ")
         storage.storage_list()
-        password = input("Password: ")
-        checker.checker_saved(password)
-    elif opt == "3":
+        
+        password = input("\nPassword: ")
+        #Links to checker password section/ file where
+        # the inputted password is checked within the defined 
+        # paramaters - then gives a score.
+        checker.checker_password(password)
+        
+        #Option for the user to save.
+        print("\nSave Menu: ")
+        opt = input("Y/N ").capitalize()
+        if opt == "Y":
+            checker.checker_saved(password)
+        elif opt == "N":
+            return
+        else:
+            print("Invalid Option")
+
+        
+    elif opt == "2":
         return
     else:
         print("Not an Option, Enter a Valid Option")
@@ -140,6 +155,7 @@ def main():
 
     cowsay.turtle(f"Welcome, {name}")
 #ask user to input a no. from 1-4 a links that option to a definition else where.
+    
     while True:
         print("\n-- Menu --")
         print("\n1. Generate New Password")
@@ -149,7 +165,7 @@ def main():
 
 #creates links to main (definition) sections of code
 #this had caused issues with the programme from running and had to add the {} to name to fix.
-        opt = input(f"{name}, Please Select an Option (1-4): ")
+        opt = input(f"\n{name}, Please Select an Option (1-4): ")
 
         if opt == "1":
             password_gen()

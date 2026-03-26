@@ -2,7 +2,7 @@
 
 import csv
 import os
-
+import main
 
 file_name = "password_storage.csv"
 #This checks that the password file has been made/ 
@@ -12,7 +12,6 @@ def storage_check():
         with open(file_name, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["password"])
-
 
 def storage_save(password):
 
@@ -27,7 +26,6 @@ def storage_save(password):
 # the sotorage to save only the word "password" only.
     print("\nPassword Saved.")
 
-
 def storage_list():
     #Finds the storage file - if it doesn't exist
     # it prints "No Passwords Saved" otheriwse it continues.
@@ -38,23 +36,24 @@ def storage_list():
     with open(file_name, "r", newline="") as file:
         reader = csv.DictReader(file)
         for row in reader:
-            passwords.append({"password": row["password"]}) #row by row
+            passwords.append({"password": row["password_storage.csv"]}) #row by row
         
         if not passwords:
             print("\nNo Passwords Saved.")
             return #if no passwords, goes to main.
-    
-        print("\n- - Saved Passwords - -")
-        #"x" is used because the passwords are stored as a dictionary, 
-        # so x is used to give the dictionary a value.
-        for item in sorted (passwords, key=lambda x: x["password"]):
-            print(f"--> {item['password']}")
+
+        else:
+            print("\n- - Saved Passwords - -")
+            #"x" is used because the passwords are stored as a dictionary, 
+            # so x is used to give the dictionary a value.
+            for item in sorted (passwords, key=lambda x: x["password"]):
+                print(f"--> {item['password']}")
 
 def storage_deleteall():
     storage_check() #files and header - check.
     passwords = []
 
-    clear_all = input("Clear all passwords? Y/N: ").capitalize()
+    clear_all = input("\nClear all passwords? Y/N: ").capitalize()
     if clear_all == "Y":
 
         print("\nClearing Passwords...")
@@ -64,6 +63,9 @@ def storage_deleteall():
             writer = csv.writer(file)
             writer.writerow({file_name: passwords})
         print("\nPasswords Cleared.")
+    elif clear_all == "N":
+        return 
     else:
-        return
-    
+        print("Invalid option")
+        return storage_deleteall()
+        
